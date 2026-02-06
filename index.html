@@ -1532,6 +1532,174 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+<!-- ===== Quasar Chatbot (Coforge-branded) – UI-only overrides ===== -->
+<!-- 1) Branding function (must appear before the widget loader) -->
+<script>
+  function lcwBranding() {
+    // --- Coforge brand palette ---
+    const coforgeOrange = "#F15B40";   // primary brand orange
+    const coforgeCharcoal = "#333333"; // dark text / header base
+    const coforgeWhite = "#FFFFFF";    // white
+    const brandFont = "Inter, Segoe UI, Arial, sans-serif"; // web-safe stack
+    const brandLogoUrl = "https://yourcdn.example.com/coforge-mark-28.png"; // 24–32px logo
+
+    return {
+      // Widget frame: size, radius, shadow
+      styleProps: {
+        generalStyles: {
+          width: "384px",
+          height: "620px",
+          borderRadius: "14px",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.22)",
+          fontFamily: brandFont
+        }
+      },
+
+      // Header (replace icon, name the bot, apply Coforge dark header)
+      headerProps: {
+        controlProps: {
+          titleText: "Quasar Chatbot",
+          subtitleText: "Powered by Coforge"
+        },
+        styleProps: {
+          generalStyles: {
+            backgroundColor: coforgeCharcoal,
+            color: coforgeWhite,
+            borderTopLeftRadius: "14px",
+            borderTopRightRadius: "14px"
+          },
+          titleStyles: { fontWeight: 700, fontSize: "14px", letterSpacing: ".2px" },
+          subtitleStyles: { opacity: 0.8, fontSize: "12px" }
+        },
+        componentOverrides: {
+          headerIcon: () => {
+            const img = document.createElement("img");
+            img.src = brandLogoUrl;
+            img.alt = "Coforge";
+            img.style.width = "24px";
+            img.style.height = "24px";
+            img.style.borderRadius = "6px";
+            img.style.background = "transparent";
+            return img;
+          }
+        }
+      },
+
+      // Launcher (chat button) – Coforge orange
+      chatButtonProps: {
+        controlProps: {
+          title: "Chat with Quasar",
+          subtitle: "We’re online"
+        },
+        styleProps: {
+          generalStyleProps: {
+            backgroundColor: coforgeOrange,
+            color: coforgeWhite,
+            borderRadius: "14px",
+            boxShadow: "0 10px 24px rgba(241,91,64,0.45)"
+          },
+          titleStyleProps: { fontWeight: 700 }
+        }
+      },
+
+      // Footer buttons – keep clean, or set to false to hide
+      footerProps: {
+        controlProps: {
+          hideDownloadTranscriptButton: true,
+          hideEmailTranscriptButton: false
+        },
+        styleProps: {
+          generalStyles: { borderTop: "1px solid #E6EAF2" }
+        }
+      },
+
+      // Web Chat layout – bubbles, links, input, etc.
+      webChatContainerProps: {
+        webChatStyles: {
+          // surface
+          backgroundColor: "#FAFBFE",
+          // customer (you) bubbles
+          bubbleBackground: "#F6F8FC",
+          bubbleBorderColor: "#E3E9F3",
+          bubbleTextColor: "#1D2A3B",
+          // agent/bot bubbles
+          bubbleFromAgentBackground: coforgeWhite,
+          bubbleFromAgentBorderColor: "#E3E9F3",
+          bubbleFromAgentTextColor: "#1D2A3B",
+          // brand accents
+          accent: coforgeOrange,
+          linkColor: coforgeOrange,
+          // input
+          sendBoxBackground: coforgeWhite,
+          sendBoxBorderTop: "1px solid #E6EAF2",
+          sendBoxTextColor: "#1D2A3B",
+          // avatars (optional)
+          avatarBorderRadius: 6,
+          avatarSize: 28
+        },
+        // Extra polish: Adaptive Cards & message styles
+        renderingMiddlewareProps: {
+          userMessageStyleProps: {
+            fontSize: "14px", lineHeight: "1.45",
+            padding: "8px 12px", borderRadius: "10px"
+          },
+          systemMessageStyleProps: {
+            fontSize: "12px", color: "#6E7C91"
+          },
+          attachmentAdaptiveCardStyles: {
+            borderRadius: "10px",
+            borderColor: "#E3E9F3",
+            borderWidth: "1px",
+            borderStyle: "solid"
+          }
+        },
+        webChatProps: {
+          // Keep cards on-brand; extend as needed
+          adaptiveCardsHostConfig: {
+            supportsInteractivity: true,
+            containerStyles: {
+              default: { foregroundColors: { default: { default: "#1D2A3B" } } }
+            },
+            // Example button tinting via host config where applicable
+          }
+        }
+      }
+    };
+  }
+</script>
+
+<!-- 2) Microsoft Omnichannel Live Chat Widget (v2) with callback -->
+<!-- Keep your IDs/URLs; enable v2 + pass our customization function -->
+<script
+  v2
+  id="Microsoft_Omnichannel_LCWidget"
+  src="https://oc-cdn-ocprod.azureedge.net/livechatwidget/scripts/LiveChatBootstrapper.js"
+  onerror="(function(el){
+      el.parentNode.removeChild(el);
+      var s=document.createElement('script');
+      s.src='https://ocprodocprodnamgs.blob.core.windows.net/livechatwidget/scripts/LiveChatBootstrapper.js';
+      s.setAttribute('id','Microsoft_Omnichannel_LCWidget');
+      s.setAttribute('data-app-id','4076e30e-e12b-44b0-b430-9b268f65059e');
+      s.setAttribute('data-lcw-version','prod');
+      s.setAttribute('data-org-id','45f2d356-fe00-f111-8c77-6045bd00811a');
+      s.setAttribute('data-org-url','https://m-45f2d356-fe00-f111-8c77-6045bd00811a.us.omnichannelengagementhub.com');
+      s.setAttribute('data-customization-callback','lcwBranding');
+      s.setAttribute('data-font-family-override','Inter, Segoe UI, Arial, sans-serif');
+      s.setAttribute('data-color-override','#F15B40'); // baseline accent (Coforge orange)
+      document.body.appendChild(s);
+  })(this);"
+  data-app-id="4076e30e-e12b-44b0-b430-9b268f65059e"
+  data-lcw-version="prod"
+  data-org-id="45f2d356-fe00-f111-8c77-6045bd00811a"
+  data-org-url="https://m-45f2d356-fe00-f111-8c77-6045bd00811a.us.omnichannelengagementhub.com"
+  data-customization-callback="lcwBranding"
+  data-font-family-override="Inter, Segoe UI, Arial, sans-serif"
+  data-color-override="#F15B40"
+  async>
+</script>
+
 <!-- Microsoft Omnichannel Live Chat Widget -->
 <script 
     id="Microsoft_Omnichannel_LCWidget"
