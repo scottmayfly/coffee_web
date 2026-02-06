@@ -1536,6 +1536,7 @@
 
 <!-- ===== Quasar Chatbot (Coforge-branded) – UI-only overrides ===== -->
 <!-- 1) Branding function (must appear before the widget loader) -->
+<!--commenting out custome UI for chatbot
 <script>
   function lcwBranding() {
     // --- Coforge brand palette ---
@@ -1669,9 +1670,10 @@
     };
   }
 </script>
-
+-->
 <!-- 2) Microsoft Omnichannel Live Chat Widget (v2) with callback -->
 <!-- Keep your IDs/URLs; enable v2 + pass our customization function -->
+<!-- commenting out omnichannel widget which works with custom UI
 <script
   v2
   id="Microsoft_Omnichannel_LCWidget"
@@ -1699,9 +1701,9 @@
   data-color-override="#F15B40"
   async>
 </script>
-
+-->
 <!-- Microsoft Omnichannel Live Chat Widget -->
-<!-- <script 
+<script 
     id="Microsoft_Omnichannel_LCWidget"
     src="https://oc-cdn-ocprod.azureedge.net/livechatwidget/scripts/LiveChatBootstrapper.js"
     onerror="(function(el){
@@ -1720,7 +1722,7 @@
     data-org-id="45f2d356-fe00-f111-8c77-6045bd00811a"
     data-org-url="https://m-45f2d356-fe00-f111-8c77-6045bd00811a.us.omnichannelengagementhub.com"
     async>
-</script> -->
+</script> 
 </body>
 
 </html>
